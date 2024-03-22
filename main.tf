@@ -5,10 +5,11 @@ data "aws_availability_zones" "available" {
     name   = "opt-in-status"
     values = ["opt-in-not-required"]
   }
+
 }
 
 locals {
-  cluster_name = "pim-dev"
+  cluster_name = "kepler-poc-cluster"
 }
 
 module "vpc" {
@@ -73,18 +74,18 @@ module "eks" {
       launch_template_name = "${local.cluster_name}-main-on-demand"
       name                 = "on-demand"
 
-      instance_types = ["t3.small"]
+      instance_types = ["t3.medium"]
 
       min_size     = 1
       max_size     = 3
-      desired_size = 1
+      desired_size = 2
     }
 
     spot_only = {
       launch_template_name = "${local.cluster_name}-spot"
       name                 = "spot"
 
-      instance_types = ["t3.small"]
+      instance_types = ["t3.micro"]
       capacity_type  = "SPOT"
 
       min_size     = 0

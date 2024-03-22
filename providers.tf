@@ -1,11 +1,4 @@
 terraform {
-  cloud {
-    organization = "pims-homelab"
-
-    workspaces {
-      name = "dev-eks"
-    }
-  }
 
   required_providers {
     aws = {
@@ -34,5 +27,5 @@ terraform {
 
 provider "aws" {
   region              = var.region
-  allowed_account_ids = ["521245555176"]
+  allowed_account_ids = ["381491847442"]
 }
